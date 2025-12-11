@@ -12,7 +12,7 @@ modules:
       files:
         - https://pkg.surfacelinux.com/fedora/linux-surface.repo
       keys:
-        - https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/surface.asc
+        - https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc
     install:
       allow-erasing: true
       skip-broken: true
