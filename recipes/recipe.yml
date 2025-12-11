@@ -1,45 +1,155 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
 name: madoka-os
-# description will be included in the image's metadata
-description: This is my personal OS image.
+description: A customized fedora-silverblue image for chinese developer & anime lover
 
-# the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+image-version: 42
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
+  - type: dnf
+    repos:
+      files:
+        - https://pkg.surfacelinux.com/fedora/linux-surface.repo
+      keys:
+        - https://github.com/linux-surface/linux-surface/releases/download/silverblue-20201215-1/surface.asc
+    install:
+      allow-erasing: true
+      skip-broken: true
+
+      packages:
+        - kernel-surface
+        - kernel-surface-core
+        - kernel-surface-modules
+        - kernel-surface-modules-extra
+
+        - iptsd
+        - libwacom-surface
+        - surface-control
+        - surface-secureboot
+
   - type: files
     files:
       - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        destination: /
 
   - type: dnf
     repos:
+      nonfree: rpmfusion
       copr:
         - atim/starship
+        - zhullyb/v2rayA
+        - scottames/ghostty
     install:
+      allow-erasing: true
+      skip-broken: true
       packages:
-        - micro
+        # --- Shell ---
+        - zsh
+        - lsd
+        - bat
         - starship
+
+        # --- Tools ---
+        - vim
+        - distrobox
+        - util-linux-user
+        - fastfetch
+        - powertop
+        - podman-compose
+        - less
+        - wl-clipboard
+
+        # --- Zip ---
+        - p7zip
+        - p7zip-plugins
+        - unrar
+
+        # --- Network ---
+        - daed
+
+        # --- Input ---
+        - ibus-libpinyin
+
+        # --- Desktop --- (For no flathub package)
+        - ghostty
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - firefox-langpacks
+
+  - type: brew
+    brew-analytics: false
+
+  - type: systemd
+    system:
+      enabled:
+        - iptsd.service
+        - daed.service
+
+  - type: script
+    snippets:
+      - sed -i 's|SHELL=/bin/bash|SHELL=/bin/zsh|' /etc/default/useradd
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - JetBrainsMono
+
+  - type: dnf
+    install:
+      packages:
+        - google-noto-sans-fonts
+        - google-noto-serif-fonts
+        - google-noto-cjk-fonts
+        - google-noto-emoji-color-fonts
+        - google-noto-emoji-fonts
+
+        - wqy-microhei-fonts
+        - wqy-zenhei-fonts
+
+        - langpacks-zh_CN
 
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
+        install:
+          - org.freedesktop.Platform.ffmpeg-full
+          - org.freedesktop.Platform.openh264
+          - org.freedesktop.Platform.GL.default
+          - org.freedesktop.Platform.VAAPI.Intel
+          - org.freedesktop.Platform.GStreamer.gstreamer-vaapi
+
           - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+          - org.gnome.Showtime
+          - org.gnome.Builder
+          - org.gnome.Boxes
+          - net.nokyan.Resources
+          - ar.xjuan.Cambalache
+          - com.google.Chrome
+          - com.usebottles.bottles
+          - dev.zed.Zed-Preview
+      - scope: user
+        install:
+          - com.qq.QQ
+          - com.tencent.WeChat
+          - org.telegram.desktop
+          - org.zotero.Zotero
+          - org.gnome.gitlab.somas.Apostrophe
+          - cn.wps.wps_365
+
+  - type: gnome-extensions
+    install:
+      - AppIndicator and KStatusNotifierItem Support
+
+  - type: os-release
+    properties:
+      NAME: MadokaOS
+      ID: madoka
+      ID_LIKE: fedora
+      PRETTY_NAME: "Madoka OS"
+      VARIANT: "Surface Edition"
+      VARIANT_ID: surface
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
