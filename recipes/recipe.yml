@@ -80,6 +80,8 @@ modules:
 
         # --- Desktop --- (For no flathub package)
         - ghostty
+        - epiphany
+        - snapshot
     remove:
       packages:
         - firefox
@@ -118,32 +120,29 @@ modules:
 
   - type: default-flatpaks
     configurations:
-      - notify: true
+      - notify: false
         scope: system
         install:
-          - org.freedesktop.Platform.ffmpeg-full
-          - org.freedesktop.Platform.openh264
-          - org.freedesktop.Platform.GL.default
-          - org.freedesktop.Platform.VAAPI.Intel
-          - org.freedesktop.Platform.GStreamer.gstreamer-vaapi
+          - runtime/org.freedesktop.Platform/x86_64/25.08
 
           - org.gnome.Loupe
           - org.gnome.Showtime
           - org.gnome.Builder
           - org.gnome.Boxes
           - net.nokyan.Resources
+          - org.gnome.gitlab.somas.Apostrophe
+          - com.mattjakeman.ExtensionManager
           - ar.xjuan.Cambalache
           - com.google.Chrome
           - com.usebottles.bottles
           - dev.zed.Zed-Preview
-      - scope: user
+          - org.localsend.localsend_app
+      - notify: false
+        scope: user
         install:
           - com.qq.QQ
           - com.tencent.WeChat
           - org.telegram.desktop
-          - org.zotero.Zotero
-          - org.gnome.gitlab.somas.Apostrophe
-          - cn.wps.wps_365
 
   - type: gnome-extensions
     install:
