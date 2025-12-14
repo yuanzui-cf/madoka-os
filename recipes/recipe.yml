@@ -33,6 +33,10 @@ modules:
       - source: system
         destination: /
 
+  - type: script
+    snippets:
+      - curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo -o /etc/yum.repos.d/gh-cli.repo
+
   - type: dnf
     repos:
       nonfree: rpmfusion
@@ -50,21 +54,22 @@ modules:
         - starship
 
         # --- Tools ---
-        - vim
-        - distrobox
         - util-linux-user
         - fastfetch
         - powertop
-        - podman-compose
         - less
         - wl-clipboard
+
+        # --- Development ---
+        - vim
+        - distrobox
+        - podman-compose
+        - gh
 
         # --- Zip ---
         - p7zip
         - p7zip-plugins
         - unrar
-
-        # --- Network ---
 
         # --- Input ---
         - ibus-libpinyin
