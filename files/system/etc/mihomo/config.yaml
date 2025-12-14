@@ -1,0 +1,17 @@
+mixed-port: 7890
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  device: utun0
+  mtu: 9000
+  route-exclude-address:
+    - 10.0.0.0/8
+    - 192.168.0.0/16
+    - 172.16.0.0/12
+  exclude-interface:
+    - tailscale0
+
+external-ui: /etc/mihomo/frontend

@@ -38,7 +38,6 @@ modules:
       nonfree: rpmfusion
       copr:
         - atim/starship
-        - zhullyb/v2rayA
         - scottames/ghostty
     install:
       allow-erasing: true
@@ -66,7 +65,6 @@ modules:
         - unrar
 
         # --- Network ---
-        - daed
 
         # --- Input ---
         - ibus-libpinyin
@@ -84,8 +82,7 @@ modules:
   - type: systemd
     system:
       enabled:
-        # - iptsd.service
-        - daed.service
+        - mihomo.service
 
   - type: script
     snippets:
