@@ -1,17 +1,64 @@
 mixed-port: 7890
+
 tun:
   enable: true
-  stack: mixed
+  stack: system
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
-  device: utun0
   mtu: 9000
+  dns-hijack:
+    - "any:53"
+    - "tcp://any:53"
   route-exclude-address:
     - 10.0.0.0/8
     - 192.168.0.0/16
     - 172.16.0.0/12
-  exclude-interface:
-    - tailscale0
 
+proxies:
+  - name: Direct
+    type: direct
+    udp: true
+
+dns:
+  enable: true
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+    - "*"
+    - "+.lan"
+    - "+.local"
+  default-nameserver:
+    - tls://233.5.5.5
+    - tls://233.6.6.6
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    include-all: true
+    exclude-type: direct
+
+  - name: Auto
+    type: url-test
+    include-all: true
+    exclude-type: direct
+    tolerance: 10
+
+rules:
+  - GEOIP,lan,Direct,no-resolve
+
+  - GEOSITE,geolocation-!cn@cn,Direct
+  - GEOSITE,geolocation-!cn,Proxy
+  - GEOSITE,geolocation-cn@!cn,Proxy
+  - GEOSITE,geolocation-cn,Direct
+  - GEOSITE,tld-cn,Direct
+
+  - GEOIP,CN,Direct
+
+  - MATCH,Proxy
+
+external-controller: 127.0.0.1:2023
 external-ui: /etc/mihomo/frontend
