@@ -35,6 +35,10 @@ modules:
 
   - type: script
     snippets:
+      - chmod +x /usr/bin/mihomo
+
+  - type: script
+    snippets:
       - curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo -o /etc/yum.repos.d/gh-cli.repo
 
   - type: dnf
