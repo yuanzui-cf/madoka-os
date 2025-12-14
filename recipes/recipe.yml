@@ -47,6 +47,7 @@ modules:
       copr:
         - atim/starship
         - scottames/ghostty
+        - alternate/keyd
     install:
       allow-erasing: true
       skip-broken: true
@@ -63,6 +64,7 @@ modules:
         - powertop
         - less
         - wl-clipboard
+        - keyd
 
         # --- Development ---
         - vim
@@ -147,9 +149,9 @@ modules:
           - com.tencent.WeChat
           - org.telegram.desktop
 
-  - type: script
-    snippets:
-      - glib-compile-schemas /usr/share/glib-2.0/schemas
+  - type: gschema-overrides
+    include:
+      - zz-madoka.gschema.override
 
   - type: gnome-extensions
     install:
