@@ -143,6 +143,10 @@ modules:
     install:
       - AppIndicator and KStatusNotifierItem Support
 
+  - type: script
+    scripts:
+      - set-china-mirrors.sh
+
   - type: os-release
     properties:
       NAME: MadokaOS
