@@ -143,6 +143,7 @@ modules:
   - type: script
     scripts:
       - set-china-mirrors.sh
+      - set-grub-config.sh
 
   - type: os-release
     properties:
