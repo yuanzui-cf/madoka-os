@@ -36,6 +36,7 @@ modules:
   - type: script
     snippets:
       - chmod +x /usr/bin/mihomo
+      - chmod +x /usr/bin/zed
 
   - type: script
     snippets:
