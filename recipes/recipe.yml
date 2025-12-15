@@ -156,6 +156,7 @@ modules:
     install:
       - AppIndicator and KStatusNotifierItem Support
       - Dash to Dock
+      - Rounded Window Corners Reborn
     uninstall:
       - Apps Menu
       - Window List
