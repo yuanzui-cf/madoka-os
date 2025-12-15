@@ -155,6 +155,11 @@ modules:
   - type: gnome-extensions
     install:
       - AppIndicator and KStatusNotifierItem Support
+      - Dash to Dock
+    uninstall:
+      - Apps Menu
+      - Window List
+      - Launch New Instance
 
   - type: script
     scripts:
