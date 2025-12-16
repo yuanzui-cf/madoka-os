@@ -134,6 +134,7 @@ modules:
           - org.gnome.gitlab.somas.Apostrophe
           - com.mattjakeman.ExtensionManager
           - ar.xjuan.Cambalache
+          - com.github.tchx84.Flatseal
           - com.google.Chrome
           - com.usebottles.bottles
           - dev.zed.Zed-Preview
