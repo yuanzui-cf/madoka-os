@@ -4,7 +4,7 @@ name: madoka-os
 description: A customized fedora-silverblue image for chinese developer & anime lover
 
 base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42
+image-version: 43
 
 modules:
   - type: dnf
@@ -57,6 +57,7 @@ modules:
         - lsd
         - bat
         - starship
+        - gnome-shell-extension-pop-shell
 
         # --- Tools ---
         - util-linux-user
@@ -67,6 +68,7 @@ modules:
 
         # --- Development ---
         - vim
+        - helix
         - distrobox
         - podman-compose
         - gh
@@ -81,6 +83,7 @@ modules:
 
         # --- Desktop --- (For no flathub package)
         - ghostty
+        - kitty
         - epiphany
         - snapshot
     remove:
