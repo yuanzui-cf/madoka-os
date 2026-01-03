@@ -47,6 +47,7 @@ modules:
       nonfree: rpmfusion
       copr:
         - atim/starship
+        - dejan/lazygit
         - scottames/ghostty
     install:
       allow-erasing: true
@@ -72,6 +73,7 @@ modules:
         - distrobox
         - podman-compose
         - gh
+        - lazygit
 
         # --- Zip ---
         - p7zip
@@ -127,8 +129,6 @@ modules:
       - notify: false
         scope: system
         install:
-          - runtime/org.freedesktop.Platform/x86_64/25.08
-
           - org.gnome.Loupe
           - org.gnome.Showtime
           - org.gnome.Builder
