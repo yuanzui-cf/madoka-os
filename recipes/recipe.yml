@@ -85,7 +85,7 @@ modules:
 
         # --- Desktop --- (For no flathub package)
         - ghostty
-        - kitty
+        - foot
         - epiphany
         - snapshot
     remove:
