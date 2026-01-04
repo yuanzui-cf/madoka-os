@@ -49,6 +49,7 @@ modules:
         - atim/starship
         - dejan/lazygit
         - scottames/ghostty
+        - principis/howdy
     install:
       allow-erasing: true
       skip-broken: true
@@ -58,7 +59,6 @@ modules:
         - lsd
         - bat
         - starship
-        - gnome-shell-extension-pop-shell
 
         # --- Tools ---
         - util-linux-user
@@ -66,6 +66,7 @@ modules:
         - powertop
         - less
         - wl-clipboard
+        - howdy
 
         # --- Development ---
         - vim
@@ -85,7 +86,6 @@ modules:
 
         # --- Desktop --- (For no flathub package)
         - ghostty
-        - foot
         - epiphany
         - snapshot
     remove:
@@ -95,6 +95,10 @@ modules:
 
   - type: brew
     brew-analytics: false
+
+  - type: chezmoi
+    repository: "https://github.com/yuanzui-cf/madoka-os-dotfile"
+    all-users: true
 
   - type: systemd
     system:
@@ -138,10 +142,10 @@ modules:
           - com.mattjakeman.ExtensionManager
           - ar.xjuan.Cambalache
           - com.github.tchx84.Flatseal
-          - com.google.Chrome
           - com.usebottles.bottles
           - dev.zed.Zed-Preview
           - org.localsend.localsend_app
+          - com.github.marhkb.Pods
 
           - org.gtk.Gtk3theme.adw-gtk3
           - org.gtk.Gtk3theme.adw-gtk3-dark
